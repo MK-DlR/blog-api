@@ -2,7 +2,8 @@
 .env
 
 # Dependencies
-node_modules/
+backend/node_modules/
+backend/generated/prisma
 
 # Logs
 changelog.txt
