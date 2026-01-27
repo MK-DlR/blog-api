@@ -10,7 +10,9 @@ const { initializePassport } = require("./config/passport.js");
 const cors = require("cors");
 
 // require routers
-// const ROUTERNAME = require("PATH")
+const authRouter = require("./routes/authRouter");
+const commentRouter = require("./routes/commentRouter");
+const postRouter = require("./routes/postRouter");
 
 // initialize app
 const app = express();
@@ -31,7 +33,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // use routers
-// app.use("/PAGE", ROUTERNAME);
+app.use("/auth", authRouter);
+// app.use("/comments", commentRouter);
+// app.use("/posts", postRouter);
 
 // home route
 app.get("/", (req, res) => res.send("Hello world!"));
