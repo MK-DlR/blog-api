@@ -2,9 +2,6 @@
 
 require("dotenv").config();
 const express = require("express");
-const path = require("path");
-const jwt = require("jsonwebtoken");
-const { prisma } = require("./lib/prisma");
 const passport = require("passport");
 const { initializePassport } = require("./config/passport.js");
 const cors = require("cors");
@@ -20,10 +17,6 @@ const app = express();
 // initialize passport
 initializePassport(passport);
 
-// ejs view engine
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
 // passport authentication
 app.use(passport.initialize());
 
@@ -34,21 +27,21 @@ app.use(express.urlencoded({ extended: false }));
 
 // use routers
 app.use("/auth", authRouter);
-// app.use("/comments", commentRouter);
-// app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
+app.use("/posts", postRouter);
 
 // home route
 app.get("/", (req, res) => res.send("Hello world!"));
 
 // 404 handler, after all routes
 app.use((req, res) => {
-  res.status(404).render("404", { title: "404 - Page Not Found" });
+  res.status(404).json({ error: "Route not found" });
 });
 
 // error handler, last
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something went wrong!");
+  res.status(500).json({ error: "Something went wrong!" });
 });
 
 // listen for requests
