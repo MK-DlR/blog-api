@@ -9,7 +9,7 @@ const router = express.Router();
 // router.get("/", commentController.getAllComments);
 
 // GET /comments/:id - get single comment
-// router.get("/:id", commentController.getCommentById);
+router.get("/:id", commentController.getCommentById);
 
 // POST /comments - create comment
 // router.post("/", commentController.createComment);
