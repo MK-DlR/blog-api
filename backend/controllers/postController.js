@@ -35,7 +35,7 @@ exports.createPost = async (req, res) => {
     const post = req.body;
 
     // validate required fields
-    if (!post.title || !post.authorId) {
+    if (!post.title) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -45,7 +45,7 @@ exports.createPost = async (req, res) => {
         title: post.title,
         content: post.content || null,
         published: post.published || false,
-        authorId: parseInt(post.authorId),
+        authorId: 1, // hardcoded author
       },
     });
 
@@ -70,10 +70,6 @@ exports.updatePost = async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    if (!updatePost.authorId) {
-      return res.status(400).json({ error: "Must provide authorId" });
-    }
-
     // use prisma to update post
     const updatedPost = await prisma.post.update({
       where: { id: post.id },
@@ -84,7 +80,6 @@ exports.updatePost = async (req, res) => {
           updatePost.published !== undefined
             ? updatePost.published
             : post.published,
-        authorId: parseInt(updatePost.authorId),
       },
     });
 
