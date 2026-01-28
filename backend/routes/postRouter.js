@@ -16,7 +16,7 @@ router.get("/:id", findPost, postController.getPostById);
 router.post("/", postController.createPost);
 
 // PUT /posts/:id - update post
-// router.put("/:id", findPost, postController.updatePost);
+router.put("/:id", findPost, postController.updatePost);
 
 // DELETE /posts/:id - delete post
 // router.delete("/:id", findPost, postController.deletePost);

@@ -61,7 +61,40 @@ exports.createPost = async (req, res) => {
 };
 
 // update post
-// updatePost
+exports.updatePost = async (req, res) => {
+  try {
+    // use post middleware
+    const post = req.postRecord;
+
+    // get updated post data
+    const updatePost = req.body;
+
+    // validate updated post
+    if (!updatePost.title) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!updatePost.authorId) {
+      return res.status(400).json({ error: "Must provide authorId" });
+    }
+
+    // use prisma to update post
+    const updatedPost = await prisma.post.update({
+      where: { id: post.id },
+      data: {
+        content: updatePost.content,
+        postId: parseInt(updatePost.postId),
+        authorId: updatePost.authorId ? parseInt(updatePost.authorId) : null,
+        guestName: updatePost.guestName || null,
+      },
+    });
+
+    // return updated post with status 201
+    res.status(200).json({ post: updatedPost });
+  } catch (err) {
+    res.status(500).json({ error: "Error updating post" });
+  }
+};
 
 // delete post
 // deletePost
