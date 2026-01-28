@@ -16,18 +16,11 @@ exports.getAllComments = async (req, res) => {
   }
 };
 
-// get single comment
+// get specific single comment
 exports.getCommentById = async (req, res) => {
   try {
-    // find specific comment
-    const comment = await prisma.comment.findUnique({
-      where: { id: parseInt(req.params.id) },
-    });
-
-    // if specific comment not found
-    if (!comment) {
-      return res.status(404).json({ error: "Comment not found" });
-    }
+    // use comment middleware
+    const comment = req.commentRecord;
 
     // return specific comment
     res.json({ comment });
@@ -52,6 +45,7 @@ exports.createComment = async (req, res) => {
         .status(400)
         .json({ error: "Must provide authorId or guestName" });
     }
+
     // use prisma to create comment
     const newComment = await prisma.comment.create({
       data: {
@@ -72,9 +66,40 @@ exports.createComment = async (req, res) => {
 // update comment
 exports.updateComment = async (req, res) => {
   try {
-    // code
+    // use comment middleware
+    const comment = req.commentRecord;
+
+    // get updated comment data
+    const updateComment = req.body;
+
+    // validate updated comment
+    if (!updateComment.content || !updateComment.postId) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!updateComment.authorId && !updateComment.guestName) {
+      return res
+        .status(400)
+        .json({ error: "Must provide authorId or guestName" });
+    }
+
+    // use prisma to update comment
+    const updatedComment = await prisma.comment.update({
+      where: { id: comment.id },
+      data: {
+        content: updateComment.content,
+        postId: parseInt(updateComment.postId),
+        authorId: updateComment.authorId
+          ? parseInt(updateComment.authorId)
+          : null,
+        guestName: updateComment.guestName || null,
+      },
+    });
+
+    // return updated comment with status 201
+    res.status(200).json({ comment: updatedComment });
   } catch (err) {
-    res.status(400).json({ error: "Error updating comment" });
+    res.status(500).json({ error: "Error updating comment" });
   }
 };
 

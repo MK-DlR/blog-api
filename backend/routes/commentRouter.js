@@ -2,22 +2,23 @@
 
 const express = require("express");
 const commentController = require("../controllers/commentController");
+const { findComment } = require("../middleware/commentMiddleware");
 
 const router = express.Router();
 
 // GET /comments - get all comments
 router.get("/", commentController.getAllComments);
 
-// GET /comments/:id - get single comment
-router.get("/:id", commentController.getCommentById);
+// GET /comments/:id - get specific single comment
+router.get("/:id", findComment, commentController.getCommentById);
 
 // POST /comments - create comment
 router.post("/", commentController.createComment);
 
 // PUT /comments/:id - update comment
-// router.put("/:id", commentController.updateComment);
+// router.put("/:id", findComment, commentController.updateComment);
 
 // DELETE /comments/:id - delete comment
-// router.delete("/:id", commentController.deleteComment);
+// router.delete("/:id", findComment, commentController.deleteComment);
 
 module.exports = router;
