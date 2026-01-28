@@ -43,8 +43,29 @@ exports.createComment = async (req, res) => {
     const comment = req.body;
 
     // validate required fields
+    if (!comment.content || !comment.postId) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!comment.authorId && !comment.guestName) {
+      return res
+        .status(400)
+        .json({ error: "Must provide authorId or guestName" });
+    }
+    // use prisma to create comment
+    const newComment = await prisma.comment.create({
+      data: {
+        content: comment.content,
+        postId: parseInt(comment.postId),
+        authorId: comment.authorId ? parseInt(comment.authorId) : null,
+        guestName: comment.guestName || null,
+      },
+    });
+
+    // return created comment with status 201
+    res.status(201).json({ comment: newComment });
   } catch (err) {
-    res.status(400).json({ error: "Error creating comment" });
+    res.status(500).json({ error: "Error creating comment" });
   }
 };
 

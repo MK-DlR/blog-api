@@ -12,7 +12,7 @@ router.get("/", commentController.getAllComments);
 router.get("/:id", commentController.getCommentById);
 
 // POST /comments - create comment
-// router.post("/", commentController.createComment);
+router.post("/", commentController.createComment);
 
 // PUT /comments/:id - update comment
 // router.put("/:id", commentController.updateComment);
