@@ -6,7 +6,7 @@ const commentController = require("../controllers/commentController");
 const router = express.Router();
 
 // GET /comments - get all comments
-// router.get("/", commentController.getAllComments);
+router.get("/", commentController.getAllComments);
 
 // GET /comments/:id - get single comment
 router.get("/:id", commentController.getCommentById);

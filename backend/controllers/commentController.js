@@ -6,9 +6,11 @@ const { prisma } = require("../lib/prisma");
 // get all comments
 exports.getAllComments = async (req, res) => {
   try {
-    // code
+    const comments = await prisma.comment.findMany();
+
+    res.json({ comments });
   } catch (err) {
-    res.status(500).json({ error: "Error getting comments" });
+    res.status(500).json({ error: "Error fetching comments" });
   }
 };
 
