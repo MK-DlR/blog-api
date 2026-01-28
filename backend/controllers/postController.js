@@ -29,7 +29,36 @@ exports.getPostById = async (req, res) => {
 };
 
 // create post
-// createPost
+exports.createPost = async (req, res) => {
+  try {
+    // extract data
+    const post = req.body;
+
+    // validate required fields
+    if (!post.content || !post.postId) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!post.authorId) {
+      return res.status(400).json({ error: "Must provide authorId" });
+    }
+
+    // use prisma to create post
+    const newPost = await prisma.post.create({
+      data: {
+        title: post.title,
+        content: post.content || null,
+        published,
+        authorId: post.authorId ? parseInt(post.authorId) : null,
+      },
+    });
+
+    // return created post with status 201
+    res.status(201).json({ post: newPost });
+  } catch (err) {
+    res.status(500).json({ error: "Error creating post" });
+  }
+};
 
 // update post
 // updatePost

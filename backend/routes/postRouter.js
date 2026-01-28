@@ -13,7 +13,7 @@ router.get("/", postController.getAllPosts);
 router.get("/:id", findPost, postController.getPostById);
 
 // POST /posts - create post
-// router.post("/", postController.createPost);
+router.post("/", postController.createPost);
 
 // PUT /posts/:id - update post
 // router.put("/:id", findPost, postController.updatePost);
