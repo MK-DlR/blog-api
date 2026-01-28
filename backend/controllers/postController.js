@@ -97,4 +97,19 @@ exports.updatePost = async (req, res) => {
 };
 
 // delete post
-// deletePost
+exports.deletePost = async (req, res) => {
+  try {
+    // use post middleware
+    const post = req.postRecord;
+
+    // use prisma to delete post
+    await prisma.post.delete({
+      where: { id: post.id },
+    });
+
+    // return success message
+    res.status(204).json();
+  } catch (err) {
+    res.status(500).json({ error: "Error deleting post" });
+  }
+};
