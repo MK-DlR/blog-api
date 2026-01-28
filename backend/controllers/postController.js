@@ -35,12 +35,8 @@ exports.createPost = async (req, res) => {
     const post = req.body;
 
     // validate required fields
-    if (!post.content || !post.postId) {
+    if (!post.title || !post.authorId) {
       return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    if (!post.authorId) {
-      return res.status(400).json({ error: "Must provide authorId" });
     }
 
     // use prisma to create post
@@ -48,8 +44,8 @@ exports.createPost = async (req, res) => {
       data: {
         title: post.title,
         content: post.content || null,
-        published,
-        authorId: post.authorId ? parseInt(post.authorId) : null,
+        published: post.published || false,
+        authorId: parseInt(post.authorId),
       },
     });
 
@@ -82,10 +78,13 @@ exports.updatePost = async (req, res) => {
     const updatedPost = await prisma.post.update({
       where: { id: post.id },
       data: {
-        content: updatePost.content,
-        postId: parseInt(updatePost.postId),
-        authorId: updatePost.authorId ? parseInt(updatePost.authorId) : null,
-        guestName: updatePost.guestName || null,
+        title: updatePost.title,
+        content: updatePost.content || null,
+        published:
+          updatePost.published !== undefined
+            ? updatePost.published
+            : post.published,
+        authorId: parseInt(updatePost.authorId),
       },
     });
 
