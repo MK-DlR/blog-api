@@ -106,7 +106,16 @@ exports.updateComment = async (req, res) => {
 // delete comment
 exports.deleteComment = async (req, res) => {
   try {
-    // code
+    // use comment middleware
+    const comment = req.commentRecord;
+
+    // use prisma to delete comment
+    await prisma.comment.delete({
+      where: { id: comment.id },
+    });
+
+    // return success message
+    res.status(204).json();
   } catch (err) {
     res.status(500).json({ error: "Error deleting comment" });
   }

@@ -16,9 +16,9 @@ router.get("/:id", findComment, commentController.getCommentById);
 router.post("/", commentController.createComment);
 
 // PUT /comments/:id - update comment
-// router.put("/:id", findComment, commentController.updateComment);
+router.put("/:id", findComment, commentController.updateComment);
 
 // DELETE /comments/:id - delete comment
-// router.delete("/:id", findComment, commentController.deleteComment);
+router.delete("/:id", findComment, commentController.deleteComment);
 
 module.exports = router;
