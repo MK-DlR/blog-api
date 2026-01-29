@@ -1,6 +1,5 @@
 // backend/controllers/commentController.js
 
-const { json } = require("express");
 const { prisma } = require("../lib/prisma");
 
 // get all comments
