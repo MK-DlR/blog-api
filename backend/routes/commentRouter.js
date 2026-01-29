@@ -3,6 +3,7 @@
 const express = require("express");
 const commentController = require("../controllers/commentController");
 const { findComment } = require("../middleware/commentMiddleware");
+const { authenticateJWT } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -16,9 +17,19 @@ router.get("/:id", findComment, commentController.getCommentById);
 router.post("/", commentController.createComment);
 
 // PUT /comments/:id - update comment
-router.put("/:id", findComment, commentController.updateComment);
+router.put(
+  "/:id",
+  authenticateJWT,
+  findComment,
+  commentController.updateComment,
+);
 
 // DELETE /comments/:id - delete comment
-router.delete("/:id", findComment, commentController.deleteComment);
+router.delete(
+  "/:id",
+  authenticateJWT,
+  findComment,
+  commentController.deleteComment,
+);
 
 module.exports = router;
