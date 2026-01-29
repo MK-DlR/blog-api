@@ -7,7 +7,7 @@ const { initializePassport } = require("./config/passport.js");
 const cors = require("cors");
 
 // require routers
-// const authRouter = require("./routes/authRouter");
+const authRouter = require("./routes/authRouter");
 const commentRouter = require("./routes/commentRouter");
 const postRouter = require("./routes/postRouter");
 
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // use routers
-// app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
 
