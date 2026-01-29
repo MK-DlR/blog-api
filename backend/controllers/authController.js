@@ -19,9 +19,6 @@ exports.loginPost = async (req, res) => {
       where: { email: email },
     });
 
-    console.log("User found:", user); // Add this
-    console.log("Password from DB:", user?.password); // Add this
-
     // check if user exists
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
