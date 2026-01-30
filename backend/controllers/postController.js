@@ -1,5 +1,7 @@
 // backend/controllers/postController.js
 
+const fs = require("fs");
+const path = require("path");
 const { prisma } = require("../lib/prisma");
 
 // get all posts
@@ -46,6 +48,7 @@ exports.createPost = async (req, res) => {
         content: post.content || null,
         published: post.published || false,
         authorId: 1, // hardcoded author
+        imageUrl: req.file ? `/uploads/${req.file.filename}` : null,
       },
     });
 
@@ -70,6 +73,14 @@ exports.updatePost = async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    // if uploading new image and old image exists, delete old image
+    if (req.file && post.imageUrl) {
+      const oldImagePath = path.join(__dirname, "..", post.imageUrl);
+      fs.unlink(oldImagePath, (err) => {
+        if (err) console.error("Error deleting old image:", err);
+      });
+    }
+
     // use prisma to update post
     const updatedPost = await prisma.post.update({
       where: { id: post.id },
@@ -80,6 +91,7 @@ exports.updatePost = async (req, res) => {
           updatePost.published !== undefined
             ? updatePost.published
             : post.published,
+        imageUrl: req.file ? `/uploads/${req.file.filename}` : post.imageUrl,
       },
     });
 
@@ -93,16 +105,22 @@ exports.updatePost = async (req, res) => {
 // delete post
 exports.deletePost = async (req, res) => {
   try {
-    // use post middleware
     const post = req.postRecord;
 
-    // use prisma to delete post
+    // if post has an image, delete it from disk
+    if (post.imageUrl) {
+      const imagePath = path.join(__dirname, "..", post.imageUrl);
+      fs.unlink(imagePath, (err) => {
+        if (err) console.error("Error deleting image:", err);
+      });
+    }
+
+    // delete post from database
     await prisma.post.delete({
       where: { id: post.id },
     });
 
-    // return success message
-    res.status(204).json();
+    res.status(204).send();
   } catch (err) {
     res.status(500).json({ error: "Error deleting post" });
   }

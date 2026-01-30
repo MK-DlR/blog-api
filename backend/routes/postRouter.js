@@ -1,6 +1,7 @@
 // backend/routes/postRouter.js
 
 const express = require("express");
+const upload = require("../config/multer");
 const postController = require("../controllers/postController");
 const { findPost } = require("../middleware/postMiddleware");
 const { authenticateJWT } = require("../middleware/authMiddleware");
@@ -14,10 +15,21 @@ router.get("/", postController.getAllPosts);
 router.get("/:id", findPost, postController.getPostById);
 
 // POST /posts - create post
-router.post("/", authenticateJWT, postController.createPost);
+router.post(
+  "/",
+  authenticateJWT,
+  upload.single("image"),
+  postController.createPost,
+);
 
 // PUT /posts/:id - update post
-router.put("/:id", authenticateJWT, findPost, postController.updatePost);
+router.put(
+  "/:id",
+  authenticateJWT,
+  findPost,
+  upload.single("image"),
+  postController.updatePost,
+);
 
 // DELETE /posts/:id - delete post
 router.delete("/:id", authenticateJWT, findPost, postController.deletePost);
