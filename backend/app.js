@@ -5,6 +5,7 @@ const express = require("express");
 const passport = require("passport");
 const { initializePassport } = require("./config/passport.js");
 const cors = require("cors");
+const path = require("path");
 
 // require routers
 const authRouter = require("./routes/authRouter");
@@ -26,17 +27,37 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static("uploads"));
 
+// serve frontend files from 'public/' at root
+app.use(express.static(path.join(__dirname, "../public")));
+
 // use routers
 app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
 
-// home route
-app.get("/", (req, res) => res.send("Hello, you've reached the backend."));
+// api home route
+// app.get("/", (req, res) => res.send("Hello, you've reached the backend."));
+
+// if no api route matches, try serving an html page
+app.get("/:page", (req, res, next) => {
+  const page = req.params.page;
+  const filePath = path.join(__dirname, "../public", `${page}.html`);
+  res.sendFile(filePath, (err) => {
+    if (err) next(); // if file doesn't exist, continue to 404 handler
+  });
+});
 
 // 404 handler, after all routes
+/*
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
+});
+*/
+
+// backend health check
+// check at: http://localhost:3000/api/health
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
 // error handler, last
