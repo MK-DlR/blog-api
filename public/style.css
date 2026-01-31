@@ -1,10 +1,19 @@
 /* public/style.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,75,100..900;1,75,100..900&display=swap');
+
 /* reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 /* header */
@@ -16,6 +25,17 @@
 .nav {
     text-align: center;
     padding: 10px 0;
+    position: absolute;
+    left: 240px;
+    width: calc(100% - 240px); /* use the remaining width */
+}
+
+#prev-article {
+    padding-right: 30px;
+}
+
+#next-article {
+    padding-left: 30px;
 }
 
 /* main container: sidebar + content */
@@ -26,7 +46,7 @@
 
 /* sidebar */
 #sidebar {
-    width: 235px;
+    width: 240px;
     background-color: #FF7F01;
     padding: 20px;
     flex-shrink: 0; /* don't shrink */
@@ -53,4 +73,5 @@
 .article-container {
     text-align: center;
     list-style-position: inside; /* ensure bulletpoints are centered */
+    padding: 20px 0;
 }
