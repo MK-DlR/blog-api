@@ -1,4 +1,4 @@
-// frontend-user/js/script.js
+// public/js/script.js
 
 import { loadHeader } from "./header.js";
 import { showPostList } from "./article-list.js";

@@ -1,3 +1,3 @@
-// frontend-user/config.js
+// public/config.js
 
 export const API_URL = "http://localhost:3000";

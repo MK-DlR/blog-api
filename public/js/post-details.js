@@ -1,4 +1,4 @@
-// frontend-user/js/post-details.js
+// public/js/post-details.js
 
 import { API_URL } from "../config.js";
 

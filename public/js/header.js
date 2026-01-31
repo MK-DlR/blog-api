@@ -1,4 +1,4 @@
-// frontend-user/js/header.js
+// public/js/header.js
 
 // inject header
 export async function loadHeader() {

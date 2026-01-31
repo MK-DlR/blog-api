@@ -1,4 +1,4 @@
-// frontend-user/js/article-list.js
+// public/js/article-list.js
 
 import { API_URL } from "../config.js";
 
