@@ -16,6 +16,14 @@ export function showPostList() {
 
       // create article container
       const articleContainer = document.createElement("ul");
+      articleContainer.classList.add("article-container");
+
+      // create article header
+      const articleHeader = document.createElement("h2");
+      articleHeader.textContent = "Article List";
+
+      // append header to container
+      articleContainer.appendChild(articleHeader);
 
       // loop through published posts
       for (const post of publishedPosts) {

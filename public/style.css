@@ -1,19 +1,56 @@
 /* public/style.css */
 
-/* header partial */
-.nav {
-    text-align: center;
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* sidebar partial */
-.sidebar {
-    /* code */
+/* header */
+.header-img {
+    width: 100%;
+    display: block;
+}
+
+.nav {
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* main container: sidebar + content */
+.main-container {
+    display: flex; 
+    min-height: 100vh;
+}
+
+/* sidebar */
+#sidebar {
+    width: 235px;
+    background-color: #FF7F01;
+    padding: 20px;
+    flex-shrink: 0; /* don't shrink */
 }
 
 .sidebar-img {
-    /* code */
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .sidebar-content {
-    /* code */
+    line-height: 1.5;
+}
+
+/* main content */
+#app {
+    flex: 1; /* take remaining width */
+    padding: 20px;
+}
+
+/* article list */
+.article-container {
+    text-align: center;
+    list-style-position: inside; /* ensure bulletpoints are centered */
 }
