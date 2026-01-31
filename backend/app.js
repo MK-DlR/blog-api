@@ -32,7 +32,7 @@ app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
 
 // home route
-app.get("/", (req, res) => res.send("Hello world!"));
+app.get("/", (req, res) => res.send("Hello, you've reached the backend."));
 
 // 404 handler, after all routes
 app.use((req, res) => {
