@@ -35,12 +35,13 @@ model Post {
 }
 
 model Comment {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   content   String
-  author    User    @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
   guestName String?
-  post      Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
 
   @@map("comments")

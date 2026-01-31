@@ -35,6 +35,16 @@ function showPostList() {
     });
 }
 
+// date formatter
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 // show post detail
 function showPostDetail(postId) {
   const app = document.getElementById("app");
@@ -56,8 +66,6 @@ function showPostDetail(postId) {
             (comment) => comment.postId === parseInt(postId),
           );
 
-          // render post + comments
-
           // create detail container
           const detailContainer = document.createElement("div");
 
@@ -65,10 +73,12 @@ function showPostDetail(postId) {
           // add post title
           // add post image (if exists)
           // add post content
-          // add post date
+          // formatted post date
+          formatDate(post.createdAt);
 
           // add comments heading
           // add comments list (loop through postComments)
+          // add comments dates
 
           // add comment form
 
