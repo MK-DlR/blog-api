@@ -52,12 +52,25 @@ export function showPostDetail(postId) {
               const commentContainer = document.createElement("div");
 
               // back to home link
+              /*
               const backLink = document.createElement("a");
               backLink.href = "/";
               backLink.classList.add("back-link");
               backLink.textContent = "Back to Home";
+              */
 
-              // add post title
+              // add post title container and title
+              const postHeaderContainer = document.createElement("div");
+              postHeaderContainer.classList.add("post-header-container");
+              const postHeader = document.createElement("h2");
+              postHeader.classList.add("post-header");
+              postHeader.textContent = post.title;
+
+              // add post subtitle
+              const postSubtitle = document.createElement("p");
+              postSubtitle.classList.add("post-subtitle");
+              postSubtitle.textContent = "Theme: Revelations";
+
               // add post image (if exists)
               // add post content
               // formatted post date
@@ -69,8 +82,13 @@ export function showPostDetail(postId) {
 
               // add comment form
 
+              // append post title container, title, and subtitle to post container
+              postContainer.appendChild(postHeaderContainer);
+              postHeaderContainer.appendChild(postHeader);
+              postContainer.appendChild(postSubtitle);
+
               // append back link, post and, comment containers to detail container
-              detailContainer.appendChild(backLink);
+              // detailContainer.appendChild(backLink);
               detailContainer.appendChild(postContainer);
               detailContainer.appendChild(commentContainer);
 

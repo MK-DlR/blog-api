@@ -81,3 +81,13 @@ a {
     text-align: left;
     display: block;
 }
+
+/* post detail */
+.post-header {
+    padding: 20px 0;
+    text-align: left;
+}
+
+.post-subtitle {
+    text-align: left;
+}

@@ -24,9 +24,6 @@ export function showPostList() {
       backLink.classList.add("back-link");
       backLink.textContent = "Back to Home";
 
-      // append back link to article container
-      articleContainer.appendChild(backLink);
-
       // create article header
       const articleHeader = document.createElement("h2");
       articleHeader.textContent = "Article List";
@@ -47,16 +44,12 @@ export function showPostList() {
         // append link to <li>, then <li> to <ul>
         articleItem.appendChild(articleLink);
         articleContainer.appendChild(articleItem);
+
+        // append back link to article container
+        articleContainer.appendChild(backLink);
       }
 
       // append <ul> to app
       app.appendChild(articleContainer);
-
-      // hide navigation links after everything is rendered
-      const prevLink = document.getElementById("prev-article");
-      const nextLink = document.getElementById("next-article");
-
-      if (prevLink) prevLink.style.display = "none";
-      if (nextLink) nextLink.style.display = "none";
     });
 }
