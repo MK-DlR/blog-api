@@ -66,14 +66,28 @@ a {
 /* main content */
 #app {
     flex: 1; /* take remaining width */
-    padding: 20px;
+    padding: 10px;
+}
+
+/* article list and post detail headers */
+.article-header-container,
+.post-header-container {
+    background-color: #818081;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 10px 10px;
+    color: white;
 }
 
 /* article list */
 .article-container {
     text-align: center;
     list-style-position: inside; /* ensure bulletpoints are centered */
-    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.article-header-container {
+    margin-top: 60px;
 }
 
 .back-link {
@@ -83,11 +97,21 @@ a {
 }
 
 /* post detail */
+.post-header-container {
+    margin-top: 60px;
+}
+
 .post-header {
-    padding: 20px 0;
     text-align: left;
 }
 
 .post-subtitle {
     text-align: left;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.post-content {
+    font-size: 24px;
+    padding-top: 20px;
 }

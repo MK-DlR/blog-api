@@ -24,12 +24,15 @@ export function showPostList() {
       backLink.classList.add("back-link");
       backLink.textContent = "Back to Home";
 
-      // create article header
+      // create article header container and header
+      const articleHeaderContainer = document.createElement("div");
+      articleHeaderContainer.classList.add("article-header-container");
       const articleHeader = document.createElement("h2");
       articleHeader.textContent = "Article List";
 
       // append header to container
-      articleContainer.appendChild(articleHeader);
+      articleHeaderContainer.appendChild(articleHeader);
+      articleContainer.appendChild(articleHeaderContainer);
 
       // loop through published posts
       for (const post of publishedPosts) {
