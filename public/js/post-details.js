@@ -39,6 +39,12 @@ export function showPostDetail(postId) {
           const postContainer = document.createElement("div");
           const commentContainer = document.createElement("div");
 
+          // back to home link
+          const backLink = document.createElement("a");
+          backLink.href = "/";
+          backLink.classList.add("back-link");
+          backLink.textContent = "Back to Home";
+
           // add post title
           // add post image (if exists)
           // add post content
@@ -51,7 +57,8 @@ export function showPostDetail(postId) {
 
           // add comment form
 
-          // append post and comment containers to detail container
+          // append back link, post and, comment containers to detail container
+          detailContainer.appendChild(backLink);
           detailContainer.appendChild(postContainer);
           detailContainer.appendChild(commentContainer);
 
