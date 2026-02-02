@@ -51,5 +51,12 @@ export function showPostList() {
 
       // append <ul> to app
       app.appendChild(articleContainer);
+
+      // hide navigation links after everything is rendered
+      const prevLink = document.getElementById("prev-article");
+      const nextLink = document.getElementById("next-article");
+
+      if (prevLink) prevLink.style.display = "none";
+      if (nextLink) nextLink.style.display = "none";
     });
 }

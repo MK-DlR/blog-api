@@ -24,46 +24,94 @@ export function showPostDetail(postId) {
     .then((postData) => {
       const post = postData.post;
 
-      // fetch all comments
-      return fetch(`${API_URL}/comments`)
+      // fetch all posts
+      return fetch(`${API_URL}/posts`)
         .then((res) => res.json())
-        .then((commentsData) => {
-          // filter to just this post's comments
-          const postComments = commentsData.comments.filter(
-            (comment) => comment.postId === parseInt(postId),
-          );
+        .then((allPostsData) => {
+          // filter and sort published posts
+          const publishedPosts = allPostsData.posts
+            .filter((p) => p.published)
+            .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
-          // create detail container
-          const detailContainer = document.createElement("div");
-          // create post and comment containers
-          const postContainer = document.createElement("div");
-          const commentContainer = document.createElement("div");
+          // call updateNavigation with data
+          updateNavigation(postId, publishedPosts);
 
-          // back to home link
-          const backLink = document.createElement("a");
-          backLink.href = "/";
-          backLink.classList.add("back-link");
-          backLink.textContent = "Back to Home";
+          // fetch all comments
+          return fetch(`${API_URL}/comments`)
+            .then((res) => res.json())
+            .then((commentsData) => {
+              // filter to just this post's comments
+              const postComments = commentsData.comments.filter(
+                (comment) => comment.postId === parseInt(postId),
+              );
 
-          // add post title
-          // add post image (if exists)
-          // add post content
-          // formatted post date
-          formatDate(post.createdAt);
+              // create detail container
+              const detailContainer = document.createElement("div");
+              // create post and comment containers
+              const postContainer = document.createElement("div");
+              const commentContainer = document.createElement("div");
 
-          // add comments heading
-          // add comments list (loop through postComments)
-          // add comments dates
+              // back to home link
+              const backLink = document.createElement("a");
+              backLink.href = "/";
+              backLink.classList.add("back-link");
+              backLink.textContent = "Back to Home";
 
-          // add comment form
+              // add post title
+              // add post image (if exists)
+              // add post content
+              // formatted post date
+              formatDate(post.createdAt);
 
-          // append back link, post and, comment containers to detail container
-          detailContainer.appendChild(backLink);
-          detailContainer.appendChild(postContainer);
-          detailContainer.appendChild(commentContainer);
+              // add comments heading
+              // add comments list (loop through postComments)
+              // add comments dates
 
-          // append detail container to app
-          app.appendChild(detailContainer);
+              // add comment form
+
+              // append back link, post and, comment containers to detail container
+              detailContainer.appendChild(backLink);
+              detailContainer.appendChild(postContainer);
+              detailContainer.appendChild(commentContainer);
+
+              // append detail container to app
+              app.appendChild(detailContainer);
+            });
         });
     });
+}
+
+// navigation links
+function updateNavigation(currentPostId, publishedPosts) {
+  // find current post's index in array
+  const currentIndex = publishedPosts.findIndex(
+    (post) => post.id === parseInt(currentPostId),
+  );
+  // determine what previous post is (if any)
+  const previousPost =
+    currentIndex > 0 ? publishedPosts[currentIndex - 1] : null;
+
+  // determine what next post is (if any)
+  const nextPost =
+    currentIndex < publishedPosts.length - 1
+      ? publishedPosts[currentIndex + 1]
+      : null;
+
+  // update Previous link in the header
+  const prevLink = document.getElementById("prev-article");
+  if (previousPost) {
+    prevLink.href = `?id=${previousPost.id}`;
+  } else {
+    prevLink.href = "#";
+    prevLink.innerHTML = "No more posts";
+  }
+
+  // update Next link in the header
+  const nextLink = document.getElementById("next-article");
+  if (nextPost) {
+    nextLink.href = `?id=${nextPost.id}`;
+  } else {
+    nextLink.href = "#";
+    nextLink.innerHTML = "No more posts";
+  }
 }
