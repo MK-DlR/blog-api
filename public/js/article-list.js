@@ -32,7 +32,7 @@ export function showPostList() {
 
         // create clickable title link
         const articleLink = document.createElement("a");
-        articleLink.href = `post.html?id=${post.id}`;
+        articleLink.href = `?id=${post.id}`;
         articleLink.textContent = post.title;
 
         // append link to <li>, then <li> to <ul>
