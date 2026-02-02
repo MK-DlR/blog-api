@@ -1,5 +1,7 @@
 // public/js/comments.js
 
+import { formatDate } from "./formatter.js";
+
 export function displayComments(commentContainer, postComments) {
   // create comment title container and title
   const commentHeaderContainer = document.createElement("div");
@@ -16,16 +18,34 @@ export function displayComments(commentContainer, postComments) {
   for (const comment of postComments) {
     // create <div> for individual comment
     const commentItem = document.createElement("div");
+    commentItem.classList.add("comment-item");
 
     // comment content
     const commentContent = document.createElement("p");
+    commentContent.classList.add("comment-content");
     commentContent.textContent = comment.content;
 
-    // comment date
-    // comment author
+    // create author and date container
+    const authorDateWrapper = document.createElement("div");
+    authorDateWrapper.classList.add("author-date-wrapper");
 
-    // append content to <div>, then <div> to comment container
+    // create formatted comment date
+    const commentDate = document.createElement("p");
+    commentDate.classList.add("comment-date");
+    commentDate.textContent = `Posted on ${formatDate(comment.createdAt)}`;
+
+    // comment author
+    const commentAuthor = document.createElement("p");
+    commentAuthor.classList.add("comment-author");
+    commentAuthor.textContent = comment.guestName
+      ? comment.guestName
+      : "Anonymous";
+
+    // append content and author + date to <div>, then <div> to comment container
     commentItem.appendChild(commentContent);
+    authorDateWrapper.appendChild(commentAuthor);
+    authorDateWrapper.appendChild(commentDate);
+    commentItem.appendChild(authorDateWrapper);
     commentContainer.appendChild(commentItem);
   }
 }

@@ -137,4 +137,26 @@ a {
 /* comments */
 .comment-header-container {
     margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.comment-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.comment-content {
+    text-align: center;
+}
+
+.author-date-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+}
+
+.comment-author {
+    font-weight: 600;
 }

@@ -37,9 +37,8 @@ export function showPostDetail(postId) {
                 (comment) => comment.postId === parseInt(postId),
               );
 
-              // create detail container
+              // create detail and post containers
               const detailContainer = document.createElement("div");
-              // create post and comment containers
               const postContainer = document.createElement("div");
 
               // create post title container and title
@@ -122,7 +121,7 @@ function updateNavigation(currentPostId, publishedPosts) {
     prevLink.href = `?id=${previousPost.id}`;
   } else {
     prevLink.href = "#";
-    prevLink.innerHTML = "No more posts";
+    prevLink.innerHTML = "No older articles";
   }
 
   // update Next link in the header
@@ -131,6 +130,6 @@ function updateNavigation(currentPostId, publishedPosts) {
     nextLink.href = `?id=${nextPost.id}`;
   } else {
     nextLink.href = "#";
-    nextLink.innerHTML = "No more posts";
+    nextLink.innerHTML = "No newer articles";
   }
 }

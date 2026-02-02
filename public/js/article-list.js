@@ -22,7 +22,7 @@ export function showPostList() {
       const backLink = document.createElement("a");
       backLink.href = "/";
       backLink.classList.add("back-link");
-      backLink.textContent = "Back to Home";
+      backLink.textContent = "<< Back to Home";
 
       // create article header container and header
       const articleHeaderContainer = document.createElement("div");
