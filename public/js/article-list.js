@@ -18,6 +18,15 @@ export function showPostList() {
       const articleContainer = document.createElement("ul");
       articleContainer.classList.add("article-container");
 
+      // back to home link
+      const backLink = document.createElement("a");
+      backLink.href = "/";
+      backLink.classList.add("back-link");
+      backLink.textContent = "Back to Home";
+
+      // append back link to article container
+      articleContainer.appendChild(backLink);
+
       // create article header
       const articleHeader = document.createElement("h2");
       articleHeader.textContent = "Article List";

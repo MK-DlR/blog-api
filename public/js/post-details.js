@@ -39,11 +39,6 @@ export function showPostDetail(postId) {
           const postContainer = document.createElement("div");
           const commentContainer = document.createElement("div");
 
-          // back to articles list link
-          const backLink = document.createElement("a");
-          backLink.href = "#";
-          backLink.textContent = "Back";
-
           // add post title
           // add post image (if exists)
           // add post content
