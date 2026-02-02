@@ -63,19 +63,26 @@ export function showPostDetail(postId) {
               postSubtitle.classList.add("post-subtitle");
               postSubtitle.textContent = "Theme: Revelations";
 
+              // create post content
+              const postContent = document.createElement("div");
+              postContent.classList.add("post-content");
+              postContent.textContent = post.content;
+
+              // create a wrapper for content + image layout
+              const contentWrapper = document.createElement("div");
+              contentWrapper.classList.add("content-wrapper");
+
               // create post image (if exists)
               if (post.imageUrl) {
                 const postImage = document.createElement("img");
                 postImage.src = post.imageUrl;
                 postImage.alt = post.title;
                 postImage.classList.add("post-image");
-                postContainer.appendChild(postImage);
+                contentWrapper.appendChild(postContent);
+                contentWrapper.appendChild(postImage);
+              } else {
+                contentWrapper.appendChild(postContent);
               }
-
-              // create post content
-              const postContent = document.createElement("div");
-              postContent.classList.add("post-content");
-              postContent.textContent = post.content;
 
               // formatted post date
               formatDate(post.createdAt);
@@ -86,13 +93,14 @@ export function showPostDetail(postId) {
 
               // add comment form
 
-              // append post title container, title, subtitle, and content to post container
+              // append post title container, title, subtitle,
+              // and content wrapper to post container
               postContainer.appendChild(postHeaderContainer);
               postHeaderContainer.appendChild(postHeader);
               postContainer.appendChild(postSubtitle);
-              postContainer.appendChild(postContent);
+              postContainer.appendChild(contentWrapper);
 
-              // append back link, post, and comment containers to detail container
+              // append post and comment containers to detail container
               detailContainer.appendChild(postContainer);
               detailContainer.appendChild(commentContainer);
 

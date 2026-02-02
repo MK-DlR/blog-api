@@ -111,8 +111,22 @@ a {
     padding-top: 10px;
 }
 
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    padding-top: 20px;
+    align-items: flex-start;
+}
+
 .post-content {
     font-size: 24px;
-    padding-top: 20px;
+    padding-top: 0;
     white-space: pre-wrap;
+    flex: 1;
+}
+
+.post-image {
+    width: 200px;
+    height: auto;
+    flex-shrink: 0;
 }
