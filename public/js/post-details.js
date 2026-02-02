@@ -64,6 +64,13 @@ export function showPostDetail(postId) {
               postSubtitle.textContent = "Theme: Revelations";
 
               // create post image (if exists)
+              if (post.imageUrl) {
+                const postImage = document.createElement("img");
+                postImage.src = post.imageUrl;
+                postImage.alt = post.title;
+                postImage.classList.add("post-image");
+                postContainer.appendChild(postImage);
+              }
 
               // create post content
               const postContent = document.createElement("div");

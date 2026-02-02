@@ -25,7 +25,7 @@ app.use(passport.initialize());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/uploads", express.static("uploads"));
+app.use("/images", express.static(path.join(__dirname, "../public/images")));
 
 // serve frontend files from 'public/' at root
 app.use(express.static(path.join(__dirname, "../public")));
@@ -34,9 +34,6 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
-
-// api home route
-// app.get("/", (req, res) => res.send("Hello, you've reached the backend."));
 
 // if no api route matches, try serving an html page
 app.get("/:page", (req, res, next) => {

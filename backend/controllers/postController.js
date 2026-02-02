@@ -48,7 +48,9 @@ exports.createPost = async (req, res) => {
         content: post.content || null,
         published: post.published || false,
         authorId: 1, // hardcoded author
-        imageUrl: req.file ? `/uploads/${req.file.filename}` : null,
+        imageUrl: req.file
+          ? `/uploads/${req.file.filename}`
+          : post.imageUrl || null,
       },
     });
 

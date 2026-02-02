@@ -114,4 +114,5 @@ a {
 .post-content {
     font-size: 24px;
     padding-top: 20px;
+    white-space: pre-wrap;
 }
