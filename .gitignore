@@ -8,3 +8,4 @@ backend/generated/prisma
 # Logs
 changelog.txt
 plan.txt
+posts.txt

@@ -71,7 +71,8 @@ a {
 
 /* article list and post detail headers */
 .article-header-container,
-.post-header-container {
+.post-header-container,
+.comment-header-container {
     background-color: #818081;
     margin-left: -10px;
     margin-right: -10px;
@@ -88,6 +89,7 @@ a {
 
 .article-header-container {
     margin-top: 60px;
+    margin-bottom: 10px;
 }
 
 .back-link {
@@ -126,7 +128,13 @@ a {
 }
 
 .post-image {
-    width: 200px;
+    width: 250px;
     height: auto;
     flex-shrink: 0;
+    padding-right: 30px;
+}
+
+/* comments */
+.comment-header-container {
+    margin-top: 30px;
 }
