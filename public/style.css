@@ -160,3 +160,10 @@ a {
 .comment-author {
     font-weight: 600;
 }
+
+/* new comment form */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
