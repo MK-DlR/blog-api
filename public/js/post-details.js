@@ -111,7 +111,17 @@ export function showPostDetail(postId) {
                   },
                   body: JSON.stringify(commentData),
                 })
-                  .then((res) => res.json())
+                  .then((res) => {
+                    // check if response is not ok (status 400, 500, etc.)
+                    if (!res.ok) {
+                      return res.json().then((errorData) => {
+                        throw new Error(
+                          errorData.error || "Failed to post comment",
+                        );
+                      });
+                    }
+                    return res.json();
+                  })
                   .then((data) => {
                     // get new comment from response
                     const newComment = data.comment;
@@ -131,9 +141,28 @@ export function showPostDetail(postId) {
 
                     // reset form
                     commentForm.reset();
+
+                    // remove any existing error message
+                    const existingError =
+                      commentForm.querySelector(".error-message");
+                    if (existingError) {
+                      existingError.remove();
+                    }
                   })
                   .catch((err) => {
                     console.error("Error posting comment:", err);
+
+                    // display error message to user
+                    let errorMsg = commentForm.querySelector(".error-message");
+                    if (!errorMsg) {
+                      errorMsg = document.createElement("div");
+                      errorMsg.classList.add("error-message");
+                      commentForm.insertBefore(
+                        errorMsg,
+                        commentForm.firstChild,
+                      );
+                    }
+                    errorMsg.textContent = err.message;
                   });
               });
 
