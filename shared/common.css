@@ -115,9 +115,17 @@ a {
 
 .content-wrapper {
     display: flex;
+    flex-direction: column; 
     gap: 20px;
     padding-top: 20px;
     align-items: flex-start;
+}
+
+.post-content-image-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .post-content {

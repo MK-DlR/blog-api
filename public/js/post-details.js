@@ -62,17 +62,31 @@ export function showPostDetail(postId) {
               const contentWrapper = document.createElement("div");
               contentWrapper.classList.add("content-wrapper");
 
+              // create wrapper for just content and image
+              const contentImageWrapper = document.createElement("div");
+              contentImageWrapper.classList.add("post-content-image-wrapper");
+
+              // back to home link
+              const backLink = document.createElement("a");
+              backLink.href = "/";
+              backLink.classList.add("back-link");
+              backLink.textContent = "<< Back to Home";
+
               // create post image (if exists)
               if (post.imageUrl) {
                 const postImage = document.createElement("img");
                 postImage.src = post.imageUrl;
                 postImage.alt = post.title;
                 postImage.classList.add("post-image");
-                contentWrapper.appendChild(postContent);
-                contentWrapper.appendChild(postImage);
+                contentImageWrapper.appendChild(postContent);
+                contentImageWrapper.appendChild(postImage);
               } else {
-                contentWrapper.appendChild(postContent);
+                contentImageWrapper.appendChild(postContent);
               }
+
+              // Add content/image wrapper to main wrapper, then back link
+              contentWrapper.appendChild(contentImageWrapper);
+              contentWrapper.appendChild(backLink);
 
               // formatted post date
               formatDate(post.createdAt);
