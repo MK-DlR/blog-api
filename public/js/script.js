@@ -35,6 +35,7 @@ function showMostRecentPost() {
     });
 }
 
+// handle url parameters
 const params = new URLSearchParams(window.location.search);
 const postId = params.get("id");
 const view = params.get("view");
