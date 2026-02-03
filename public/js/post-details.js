@@ -87,6 +87,56 @@ export function showPostDetail(postId) {
               // create new comment box
               const commentForm = commentBox(postId);
 
+              // submit form data
+              commentForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                // extract form data
+                const formData = new FormData(commentForm);
+                const content = formData.get("content");
+                const guestName = formData.get("guestName");
+
+                // create data object to send
+                const commentData = {
+                  content: content,
+                  guestName: guestName,
+                  postId: postId,
+                };
+
+                // make fetch POST request
+                fetch(`${API_URL}/comments`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(commentData),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    // get new comment from response
+                    const newComment = data.comment;
+
+                    // add new comment to array
+                    postComments.push(newComment);
+
+                    // clear comment container
+                    commentContainer.innerHTML = "";
+
+                    // re-display with updated comments
+                    displayComments(
+                      commentContainer,
+                      postComments,
+                      commentForm,
+                    );
+
+                    // reset form
+                    commentForm.reset();
+                  })
+                  .catch((err) => {
+                    console.error("Error posting comment:", err);
+                  });
+              });
+
               // create and populate comment container
               const commentContainer = document.createElement("div");
 
