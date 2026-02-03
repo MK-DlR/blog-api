@@ -44,7 +44,6 @@ exports.createComment = async (req, res) => {
       data: {
         content: comment.content,
         postId: parseInt(comment.postId),
-        authorId: 1,
         guestName: comment.guestName || null,
       },
     });
@@ -72,9 +71,7 @@ exports.updateComment = async (req, res) => {
     }
 
     if (!updateComment.authorId && !updateComment.guestName) {
-      return res
-        .status(400)
-        .json({ error: "Must provide authorId or guestName" });
+      return res.status(400).json({ error: "Must provide guestName" });
     }
 
     // use prisma to update comment
