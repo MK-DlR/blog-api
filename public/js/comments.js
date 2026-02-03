@@ -49,3 +49,10 @@ export function displayComments(commentContainer, postComments) {
     commentContainer.appendChild(commentItem);
   }
 }
+
+export function commentBox() {
+  const commentForm = document.createElement("form");
+  commentForm.classList.add("comment-form");
+  commentForm.method = "POST";
+  commentForm.action = "/submit";
+}

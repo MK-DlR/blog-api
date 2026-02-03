@@ -84,12 +84,15 @@ export function showPostDetail(postId) {
               postContainer.appendChild(postSubtitle);
               postContainer.appendChild(contentWrapper);
 
+              // TO DO: create new comment box
+
               // create and populate comment container
               const commentContainer = document.createElement("div");
               displayComments(commentContainer, postComments);
 
               // append post and comment containers to detail container
               detailContainer.appendChild(postContainer);
+              // TO DO: append new comment box here
               detailContainer.appendChild(commentContainer);
 
               // append detail container to app
