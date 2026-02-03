@@ -4,7 +4,7 @@ import { loadHeader } from "/shared/scripts/header.js";
 import { loadSidebar } from "/shared/scripts/sidebar.js";
 import { showPostDetail } from "/js/post-details.js";
 import { showPostList } from "/js/article-list.js";
-import { displayComments } from "/js/comments.js";
+import { newPost } from "./new-post.js";
 
 loadHeader();
 loadSidebar();
@@ -21,10 +21,7 @@ if (postId) {
   // article list was clicked
   showPostList();
 } else {
-  // default view - for now just show message
-  // later show "new post" form here
-  document.getElementById("app").innerHTML =
-    "Admin Panel - New Post Form (coming soon)";
+  newPost();
 }
 
 console.log("Admin loaded");
