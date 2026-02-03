@@ -34,7 +34,7 @@ export function displayComments(commentContainer, postComments) {
     commentDate.classList.add("comment-date");
     commentDate.textContent = `Posted on ${formatDate(comment.createdAt)}`;
 
-    // comment author
+    // create comment author
     const commentAuthor = document.createElement("p");
     commentAuthor.classList.add("comment-author");
     commentAuthor.textContent = comment.guestName
@@ -50,9 +50,53 @@ export function displayComments(commentContainer, postComments) {
   }
 }
 
-export function commentBox() {
+export function commentBox(postId) {
+  // create comment form
   const commentForm = document.createElement("form");
   commentForm.classList.add("comment-form");
   commentForm.method = "POST";
-  commentForm.action = "/submit";
+  commentForm.action = "/api/comments";
+
+  // hidden input for postId parameter
+  const hiddenPostId = document.createElement("input");
+  hiddenPostId.type = "hidden";
+  hiddenPostId.name = "postId";
+  hiddenPostId.value = postId;
+
+  // create guestName input and label
+  const commentAuthor = document.createElement("input");
+  commentAuthor.classList.add("comment-input");
+  commentAuthor.name = "guestName";
+  commentAuthor.id = "guestName";
+  commentAuthor.type = "text";
+  commentAuthor.placeholder = "Nickname";
+  const commentAuthorLabel = document.createElement("label");
+  commentAuthorLabel.textContent = "Nickname:";
+  commentAuthorLabel.setAttribute("for", "guestName");
+
+  // create content input and label
+  const commentContent = document.createElement("textarea");
+  commentContent.classList.add("comment-input");
+  commentContent.name = "content";
+  commentContent.id = "content";
+  commentContent.placeholder = "Comment";
+  const commentContentLabel = document.createElement("label");
+  commentContentLabel.textContent = "Comment:";
+  commentContentLabel.setAttribute("for", "content");
+
+  // create submit button
+  const commentSubmit = document.createElement("button");
+  commentSubmit.classList.add("comment-submit");
+  commentSubmit.type = "submit";
+  commentSubmit.textContent = "Submit Comment";
+
+  // append labels and input to form
+  commentForm.appendChild(hiddenPostId);
+  commentForm.appendChild(commentAuthorLabel);
+  commentForm.appendChild(commentAuthor);
+  commentForm.appendChild(commentContentLabel);
+  commentForm.appendChild(commentContent);
+  commentForm.appendChild(commentSubmit);
+
+  return commentForm;
 }
