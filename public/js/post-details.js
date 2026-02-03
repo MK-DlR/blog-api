@@ -1,7 +1,7 @@
 // public/js/post-details.js
 
 import { API_URL } from "../config.js";
-import { displayComments } from "./comments.js";
+import { displayComments, commentBox } from "./comments.js";
 import { formatDate } from "./formatter.js";
 
 // show post detail
@@ -84,15 +84,17 @@ export function showPostDetail(postId) {
               postContainer.appendChild(postSubtitle);
               postContainer.appendChild(contentWrapper);
 
-              // TO DO: create new comment box
+              // create new comment box
+              const commentForm = commentBox(postId);
 
               // create and populate comment container
               const commentContainer = document.createElement("div");
-              displayComments(commentContainer, postComments);
+
+              // display existing comments
+              displayComments(commentContainer, postComments, commentForm);
 
               // append post and comment containers to detail container
               detailContainer.appendChild(postContainer);
-              // TO DO: append new comment box here
               detailContainer.appendChild(commentContainer);
 
               // append detail container to app

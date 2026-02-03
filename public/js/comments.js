@@ -2,7 +2,7 @@
 
 import { formatDate } from "./formatter.js";
 
-export function displayComments(commentContainer, postComments) {
+export function displayComments(commentContainer, postComments, commentForm) {
   // create comment title container and title
   const commentHeaderContainer = document.createElement("div");
   commentHeaderContainer.classList.add("comment-header-container");
@@ -13,6 +13,9 @@ export function displayComments(commentContainer, postComments) {
   // append comment title container and title to comment container
   commentContainer.appendChild(commentHeaderContainer);
   commentHeaderContainer.appendChild(commentHeader);
+
+  // append comment form
+  commentContainer.appendChild(commentForm);
 
   // create comments list (loop through postComments)
   for (const comment of postComments) {
