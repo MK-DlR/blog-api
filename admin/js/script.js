@@ -16,7 +16,7 @@ const view = params.get("view");
 
 if (postId) {
   // specific post was clicked
-  showPostDetail(postId);
+  showPostDetail(postId, true);
 } else if (view === "list") {
   // article list was clicked
   showPostList();

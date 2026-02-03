@@ -5,7 +5,7 @@ import { displayComments, commentBox } from "./comments.js";
 import { formatDate } from "/shared/scripts/formatter.js";
 
 // show post detail
-export function showPostDetail(postId) {
+export function showPostDetail(postId, isAdmin = false) {
   const app = document.getElementById("app");
   // clear app
   app.innerHTML = "";
@@ -66,12 +66,6 @@ export function showPostDetail(postId) {
               const contentImageWrapper = document.createElement("div");
               contentImageWrapper.classList.add("post-content-image-wrapper");
 
-              // back to home link
-              const backLink = document.createElement("a");
-              backLink.href = "/";
-              backLink.classList.add("back-link");
-              backLink.textContent = "<< Back to Home";
-
               // create post image (if exists)
               if (post.imageUrl) {
                 const postImage = document.createElement("img");
@@ -84,9 +78,17 @@ export function showPostDetail(postId) {
                 contentImageWrapper.appendChild(postContent);
               }
 
-              // Add content/image wrapper to main wrapper, then back link
+              // add content/image wrapper to main wrapper
               contentWrapper.appendChild(contentImageWrapper);
-              contentWrapper.appendChild(backLink);
+
+              // back to admin link (only show for admin)
+              if (isAdmin) {
+                const backLink = document.createElement("a");
+                backLink.href = "/admin";
+                backLink.classList.add("back-link");
+                backLink.textContent = "<< Back to Admin";
+                contentWrapper.appendChild(backLink);
+              }
 
               // formatted post date
               formatDate(post.createdAt);
