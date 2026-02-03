@@ -2,7 +2,7 @@
 
 import { API_URL } from "../config.js";
 import { displayComments, commentBox } from "./comments.js";
-import { formatDate } from "./formatter.js";
+import { formatDate } from "/shared/scripts/formatter.js";
 
 // show post detail
 export function showPostDetail(postId) {

@@ -38,6 +38,9 @@ app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
 
+// serve shared assets - available to both frontends
+app.use("/shared", express.static(path.join(__dirname, "../shared")));
+
 // handle admin routes - serve admin HTML files
 app.get("/admin/:page", (req, res, next) => {
   const page = req.params.page;

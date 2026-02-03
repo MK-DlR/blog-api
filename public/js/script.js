@@ -1,7 +1,7 @@
 // public/js/script.js
 
-import { loadHeader } from "./header.js";
-import { loadSidebar } from "./sidebar.js";
+import { loadHeader } from "/shared/scripts/header.js";
+import { loadSidebar } from "/shared/scripts/sidebar.js";
 import { showPostList } from "./article-list.js";
 import { showPostDetail } from "./post-details.js";
 import { API_URL } from "../config.js";

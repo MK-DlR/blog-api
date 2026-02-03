@@ -1,6 +1,6 @@
 // public/js/comments.js
 
-import { formatDate } from "./formatter.js";
+import { formatDate } from "/shared/scripts/formatter.js";
 
 export function displayComments(commentContainer, postComments, commentForm) {
   // create comment title container and title

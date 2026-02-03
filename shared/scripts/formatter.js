@@ -1,4 +1,4 @@
-// public/js/formatter.js
+// shared/scripts/formatter.js
 
 // date formatter
 export function formatDate(dateString) {
