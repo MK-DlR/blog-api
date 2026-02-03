@@ -39,6 +39,10 @@ exports.createComment = async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    if (!comment.authorId && !comment.guestName) {
+      return res.status(400).json({ error: "Must provide guestName" });
+    }
+
     // use prisma to create comment
     const newComment = await prisma.comment.create({
       data: {
