@@ -27,6 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join(__dirname, "../public/images")));
 
+// serve admin frontend from '/admin' path
+app.use("/admin", express.static(path.join(__dirname, "../admin")));
+
 // serve frontend files from 'public/' at root
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -35,7 +38,21 @@ app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/posts", postRouter);
 
-// if no api route matches, try serving an html page
+// handle admin routes - serve admin HTML files
+app.get("/admin/:page", (req, res, next) => {
+  const page = req.params.page;
+  const filePath = path.join(__dirname, "../admin", `${page}.html`);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      // if page doesn't exist, serve admin index.html
+      res.sendFile(path.join(__dirname, "../admin", "index.html"), (err) => {
+        if (err) next(); // if index doesn't exist either, continue to next handler
+      });
+    }
+  });
+});
+
+// handle public routes - serve public HTML files
 app.get("/:page", (req, res, next) => {
   const page = req.params.page;
   const filePath = path.join(__dirname, "../public", `${page}.html`);
@@ -43,13 +60,6 @@ app.get("/:page", (req, res, next) => {
     if (err) next(); // if file doesn't exist, continue to 404 handler
   });
 });
-
-// 404 handler, after all routes
-/*
-app.use((req, res) => {
-  res.status(404).json({ error: "Route not found" });
-});
-*/
 
 // backend health check
 // check at: http://localhost:3000/api/health
