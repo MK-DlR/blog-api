@@ -25,13 +25,18 @@ router.post(
 // PUT /posts/:id - update post
 router.put(
   "/:id",
-  authenticateJWT,
+  // authenticateJWT,  // TO DO: uncomment after implementing login
   findPost,
   upload.single("image"),
   postController.updatePost,
 );
 
 // DELETE /posts/:id - delete post
-router.delete("/:id", authenticateJWT, findPost, postController.deletePost);
+router.delete(
+  "/:id",
+  // authenticateJWT,  // TO DO: uncomment after implementing login
+  findPost,
+  postController.deletePost,
+);
 
 module.exports = router;

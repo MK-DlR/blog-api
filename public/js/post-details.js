@@ -3,6 +3,7 @@
 import { API_URL } from "../config.js";
 import { displayComments, commentBox } from "./comments.js";
 import { formatDate } from "/shared/scripts/formatter.js";
+import { updatePostPublishStatus } from "/shared/scripts/post-actions.js";
 
 // show post detail
 export function showPostDetail(postId, isAdmin = false) {
@@ -126,7 +127,14 @@ export function showPostDetail(postId, isAdmin = false) {
               postPublish.innerHTML = '<i class="fa-solid fa-upload"></i>';
               postPublish.title = "Publish post";
               postPublish.onclick = () => {
-                // click handler
+                updatePostPublishStatus(postId, post, true)
+                  .then(() => {
+                    window.location.reload();
+                  })
+                  .catch((err) => {
+                    console.error("Error publishing post:", err);
+                    alert(err.message);
+                  });
               };
 
               // create unpublish button
@@ -136,7 +144,14 @@ export function showPostDetail(postId, isAdmin = false) {
                 '<i class="fa-solid fa-compass-drafting"></i>';
               postUnpublish.title = "Unpublish post";
               postUnpublish.onclick = () => {
-                // click handler
+                updatePostPublishStatus(postId, post, false)
+                  .then(() => {
+                    window.location.reload();
+                  })
+                  .catch((err) => {
+                    console.error("Error unpublishing post:", err);
+                    alert(err.message);
+                  });
               };
 
               // append edit and delete buttons to button container
