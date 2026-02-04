@@ -112,7 +112,7 @@ export function showPostDetail(postId, isAdmin = false) {
                 '<i class="fa-regular fa-pen-to-square"></i>';
               postEdit.title = "Edit post";
               postEdit.onclick = () => {
-                // click handler
+                window.location.href = `/admin/?view=edit&id=${postId}`;
               };
 
               // create delete button

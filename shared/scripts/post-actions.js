@@ -25,11 +25,6 @@ export function updatePostPublishStatus(postId, postData, shouldPublish) {
   });
 }
 
-// edit post
-export function editPost(postId) {
-  // code
-}
-
 // delete post
 export function deletePost(postId) {
   return fetch(`${API_URL}/posts/${postId}`, {

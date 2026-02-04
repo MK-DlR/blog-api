@@ -72,7 +72,7 @@ export function newPost() {
   const postDraft = document.createElement("button");
   postDraft.classList.add("post-draft");
   postDraft.type = "submit";
-  postDraft.textContent = "Draft Article";
+  postDraft.textContent = "Save As Draft";
 
   // append buttons to button container
   postButtonsContainer.appendChild(postSubmit);
