@@ -19,7 +19,7 @@ if (postId) {
   showPostDetail(postId, true);
 } else if (view === "list") {
   // article list was clicked
-  showPostList();
+  showPostList(true);
 } else {
   newPost();
 }

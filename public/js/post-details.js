@@ -81,14 +81,19 @@ export function showPostDetail(postId, isAdmin = false) {
               // add content/image wrapper to main wrapper
               contentWrapper.appendChild(contentImageWrapper);
 
-              // back to admin link (only show for admin)
+              // back link (always show, but different text/link based on admin status)
+              const backLink = document.createElement("a");
+              backLink.classList.add("back-link");
+
               if (isAdmin) {
-                const backLink = document.createElement("a");
                 backLink.href = "/admin";
-                backLink.classList.add("back-link");
-                backLink.textContent = "<< Back to Admin";
-                contentWrapper.appendChild(backLink);
+                backLink.textContent = "<< Back to New Article";
+              } else {
+                backLink.href = "/";
+                backLink.textContent = "<< Back to Newest Article";
               }
+
+              contentWrapper.appendChild(backLink);
 
               // formatted post date
               formatDate(post.createdAt);

@@ -48,7 +48,9 @@ export function newPost() {
   postContentLabel.textContent = "Article Content:";
   postContentLabel.setAttribute("for", "content");
 
-  // TO DO: create publish and draft buttons container
+  // TO DO: image uploader or spot to submit url for image
+
+  // create publish and draft buttons container
   const postButtonsContainer = document.createElement("div");
   postButtonsContainer.classList.add("post-buttons-container");
 
@@ -63,9 +65,6 @@ export function newPost() {
   postDraft.classList.add("post-draft");
   postDraft.type = "submit";
   postDraft.textContent = "Draft Article";
-  // TO DO: set published boolean to false
-
-  // TO DO: image uploader or spot to submit url for image
 
   // append buttons to button container
   postButtonsContainer.appendChild(postSubmit);

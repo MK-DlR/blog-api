@@ -3,7 +3,7 @@
 import { API_URL } from "../config.js";
 
 // show post list
-export function showPostList() {
+export function showPostList(isAdmin = false) {
   fetch(`${API_URL}/posts`)
     .then((res) => res.json())
     .then((data) => {
@@ -17,12 +17,6 @@ export function showPostList() {
       // create article container
       const articleContainer = document.createElement("ul");
       articleContainer.classList.add("article-container");
-
-      // back to home link
-      const backLink = document.createElement("a");
-      backLink.href = "/";
-      backLink.classList.add("back-link");
-      backLink.textContent = "<< Back to Home";
 
       // create article header container and header
       const articleHeaderContainer = document.createElement("div");
@@ -47,12 +41,23 @@ export function showPostList() {
         // append link to <li>, then <li> to <ul>
         articleItem.appendChild(articleLink);
         articleContainer.appendChild(articleItem);
-
-        // append back link to article container
-        articleContainer.appendChild(backLink);
       }
 
       // append <ul> to app
       app.appendChild(articleContainer);
+
+      // back link (always show, but different text/link based on admin status)
+      const backLink = document.createElement("a");
+      backLink.classList.add("back-link");
+
+      if (isAdmin) {
+        backLink.href = "/admin";
+        backLink.textContent = "<< Back to New Article";
+      } else {
+        backLink.href = "/";
+        backLink.textContent = "<< Back to Newest Article";
+      }
+
+      app.appendChild(backLink);
     });
 }
