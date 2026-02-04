@@ -21,7 +21,7 @@ export function newPost() {
 
   // create post form
   const postForm = document.createElement("form");
-  postForm.classList.add("post-form");
+  postForm.classList.add("new-post-form");
   postForm.method = "POST";
   postForm.action = "/api/posts";
 
@@ -36,7 +36,7 @@ export function newPost() {
   postTitleLabel.textContent = "Title:";
   postTitleLabel.setAttribute("for", "title");
 
-  // content
+  // create post content input and label
   const postContent = document.createElement("textarea");
   postContent.classList.add("post-input");
   postContent.name = "content";
@@ -45,6 +45,10 @@ export function newPost() {
   const postContentLabel = document.createElement("label");
   postContentLabel.textContent = "Article Content:";
   postContentLabel.setAttribute("for", "content");
+
+  // TO DO: create publish and draft buttons container
+  const postButtonsContainer = document.createElement("div");
+  postButtonsContainer.classList.add("post-buttons-container");
 
   // create publish button (published posts)
   const postSubmit = document.createElement("button");
@@ -59,13 +63,19 @@ export function newPost() {
   postDraft.textContent = "Draft Article";
   // TO DO: set published boolean to false
 
+  // TO DO: image uploader or spot to submit url for image
+
+  // append buttons to button container
+  postButtonsContainer.appendChild(postSubmit);
+  postButtonsContainer.appendChild(postDraft);
+
   // append labels and inputs to form
+  // and button container to form
   postForm.appendChild(postTitleLabel);
   postForm.appendChild(postTitle);
   postForm.appendChild(postContentLabel);
   postForm.appendChild(postContent);
-  postForm.appendChild(postSubmit);
-  postForm.appendChild(postDraft);
+  postForm.appendChild(postButtonsContainer);
 
   // append form to new post container and container to app
   newPostContainer.appendChild(postForm);

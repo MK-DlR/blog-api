@@ -179,3 +179,11 @@ a {
     margin: 0 auto;
     padding-bottom: 30px;
 }
+
+.comment-input[name="content"] {
+    min-height: 100px; 
+}
+
+.comment-submit {
+    margin-top: 10px;
+}
