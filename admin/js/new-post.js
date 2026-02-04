@@ -15,7 +15,7 @@ export function newPost() {
   const newPostHeaderContainer = document.createElement("div");
   newPostHeaderContainer.classList.add("new-post-header-container");
   const newPostHeader = document.createElement("h2");
-  newPostHeader.textContent = "New Article";
+  newPostHeader.textContent = "Create New Article";
 
   // append header to container
   newPostHeaderContainer.appendChild(newPostHeader);

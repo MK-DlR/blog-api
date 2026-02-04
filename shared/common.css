@@ -187,3 +187,20 @@ a {
 .comment-submit {
     margin-top: 10px;
 }
+
+/* button containers */
+.post-buttons-container,
+.admin-buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+.post-buttons-container {
+    margin-top: 10px;
+}
+/* edit and delete buttons wrapper */
+.subtitle-buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

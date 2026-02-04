@@ -52,7 +52,7 @@ export function showPostList(isAdmin = false) {
 
       if (isAdmin) {
         backLink.href = "/admin";
-        backLink.textContent = "<< Back to New Article";
+        backLink.textContent = "<< Back to Create New Article";
       } else {
         backLink.href = "/";
         backLink.textContent = "<< Back to Newest Article";

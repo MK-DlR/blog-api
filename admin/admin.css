@@ -26,17 +26,7 @@
     min-height: 300px; 
 }
 
-.post-buttons-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
 .post-submit,
 .post-draft {
     flex: 1; /* each button takes up equal space */
 }
-
-/* edit button */
-
-/* delete button */

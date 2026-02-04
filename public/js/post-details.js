@@ -58,7 +58,7 @@ export function showPostDetail(postId, isAdmin = false) {
               postContent.classList.add("post-content");
               postContent.textContent = post.content;
 
-              // create a wrapper for content + image layout
+              // create a wrapper for content and image layout
               const contentWrapper = document.createElement("div");
               contentWrapper.classList.add("content-wrapper");
 
@@ -78,31 +78,66 @@ export function showPostDetail(postId, isAdmin = false) {
                 contentImageWrapper.appendChild(postContent);
               }
 
-              // add content/image wrapper to main wrapper
+              // append content/image wrapper to main wrapper
               contentWrapper.appendChild(contentImageWrapper);
 
-              // back link (always show, but different text/link based on admin status)
+              // create back link
+              // always show, but different text/link based on admin status
               const backLink = document.createElement("a");
               backLink.classList.add("back-link");
 
               if (isAdmin) {
                 backLink.href = "/admin";
-                backLink.textContent = "<< Back to New Article";
+                backLink.textContent = "<< Back to Create New Article";
               } else {
                 backLink.href = "/";
                 backLink.textContent = "<< Back to Newest Article";
               }
 
+              // append back link
               contentWrapper.appendChild(backLink);
+
+              // create edit and delete buttons container
+              const postButtonsContainer = document.createElement("div");
+              postButtonsContainer.classList.add("admin-buttons-container");
+
+              // create edit button
+              const postEdit = document.createElement("button");
+              postEdit.className = "post-edit";
+              postEdit.innerHTML =
+                '<i class="fa-regular fa-pen-to-square"></i>';
+              postEdit.onclick = () => {
+                // click handler
+              };
+
+              // create delete button
+              const postDelete = document.createElement("button");
+              postDelete.className = "post-delete";
+              postDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+              postDelete.onclick = () => {
+                // click handler
+              };
+
+              // append edit and delete buttons to button container
+              postButtonsContainer.appendChild(postEdit);
+              postButtonsContainer.appendChild(postDelete);
+
+              // create wrapper for subtitle and buttons
+              const subtitleButtonsWrapper = document.createElement("div");
+              subtitleButtonsWrapper.classList.add("subtitle-buttons-wrapper");
+              subtitleButtonsWrapper.appendChild(postSubtitle);
+              if (isAdmin) {
+                subtitleButtonsWrapper.appendChild(postButtonsContainer);
+              }
 
               // formatted post date
               formatDate(post.createdAt);
 
-              // append post title container, title, subtitle,
+              // append post title container, title, subtitle, buttons wrapper,
               // and content wrapper to post container
               postContainer.appendChild(postHeaderContainer);
               postHeaderContainer.appendChild(postHeader);
-              postContainer.appendChild(postSubtitle);
+              postContainer.appendChild(subtitleButtonsWrapper);
               postContainer.appendChild(contentWrapper);
 
               // create new comment box
