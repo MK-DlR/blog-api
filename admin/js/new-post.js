@@ -48,7 +48,15 @@ export function newPost() {
   postContentLabel.textContent = "Article Content:";
   postContentLabel.setAttribute("for", "content");
 
-  // TO DO: image uploader or spot to submit url for image
+  // create image url input and label
+  const imgUrl = document.createElement("input");
+  imgUrl.classList.add("post-input");
+  imgUrl.name = "imageUrl";
+  imgUrl.id = "imageUrl";
+  imgUrl.type = "text";
+  const imgUrlLabel = document.createElement("label");
+  imgUrlLabel.textContent = "Image URL:";
+  imgUrlLabel.setAttribute("for", "imageUrl");
 
   // create publish and draft buttons container
   const postButtonsContainer = document.createElement("div");
@@ -70,12 +78,14 @@ export function newPost() {
   postButtonsContainer.appendChild(postSubmit);
   postButtonsContainer.appendChild(postDraft);
 
-  // append labels and inputs to form
-  // and button container to form
+  // append labels, inputs, and
+  // button container to form
   postForm.appendChild(postTitleLabel);
   postForm.appendChild(postTitle);
   postForm.appendChild(postContentLabel);
   postForm.appendChild(postContent);
+  postForm.appendChild(imgUrlLabel);
+  postForm.appendChild(imgUrl);
   postForm.appendChild(postButtonsContainer);
 
   // append form to new post container and container to app
@@ -90,6 +100,7 @@ export function newPost() {
     const formData = new FormData(postForm);
     const content = formData.get("content");
     const title = formData.get("title");
+    const imageUrl = formData.get("imageUrl");
 
     // check if publish article or draft article was pressed
     let published;
@@ -104,7 +115,7 @@ export function newPost() {
       title: title,
       content: content,
       published: published,
-      // imageUrl: imageUrl,
+      imageUrl: imageUrl,
     };
 
     // make fetch POST request
