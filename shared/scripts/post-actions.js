@@ -2,6 +2,7 @@
 
 import { API_URL } from "/config.js";
 
+// publish/unpublish post
 export function updatePostPublishStatus(postId, postData, shouldPublish) {
   return fetch(`${API_URL}/posts/${postId}`, {
     method: "PUT",
@@ -21,5 +22,26 @@ export function updatePostPublishStatus(postId, postData, shouldPublish) {
       });
     }
     return res.json();
+  });
+}
+
+// edit post
+export function editPost(postId) {
+  // code
+}
+
+// delete post
+export function deletePost(postId) {
+  return fetch(`${API_URL}/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (!res.ok) {
+      return res.json().then((errorData) => {
+        throw new Error(errorData.error || "Failed to update publish status");
+      });
+    }
   });
 }

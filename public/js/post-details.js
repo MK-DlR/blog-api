@@ -3,7 +3,10 @@
 import { API_URL } from "../config.js";
 import { displayComments, commentBox } from "./comments.js";
 import { formatDate } from "/shared/scripts/formatter.js";
-import { updatePostPublishStatus } from "/shared/scripts/post-actions.js";
+import {
+  deletePost,
+  updatePostPublishStatus,
+} from "/shared/scripts/post-actions.js";
 
 // show post detail
 export function showPostDetail(postId, isAdmin = false) {
@@ -118,7 +121,20 @@ export function showPostDetail(postId, isAdmin = false) {
               postDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
               postDelete.title = "Delete post";
               postDelete.onclick = () => {
-                // click handler
+                // confirm before deletion
+                const confirmDelete = confirm(
+                  "Are you sure you want to delete this post?",
+                );
+                if (confirmDelete) {
+                  deletePost(postId)
+                    .then(() => {
+                      window.location.href = `/admin/?view=list`;
+                    })
+                    .catch((err) => {
+                      console.error("Error deleting post:", err);
+                      alert(err.message);
+                    });
+                }
               };
 
               // create publish button
