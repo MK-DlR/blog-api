@@ -17,7 +17,7 @@ router.get("/:id", findPost, postController.getPostById);
 // POST /posts - create post
 router.post(
   "/",
-  authenticateJWT,
+  // authenticateJWT,  // TO DO: uncomment after implementing login
   upload.single("image"),
   postController.createPost,
 );

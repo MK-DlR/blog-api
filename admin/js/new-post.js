@@ -1,5 +1,7 @@
 // admin/js/new-post.js
 
+import { API_URL } from "../config.js";
+
 export function newPost() {
   const app = document.getElementById("app");
   // clear app
@@ -80,4 +82,64 @@ export function newPost() {
   // append form to new post container and container to app
   newPostContainer.appendChild(postForm);
   app.appendChild(newPostContainer);
+
+  // submit form data
+  postForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // extract form data
+    const formData = new FormData(postForm);
+    const content = formData.get("content");
+    const title = formData.get("title");
+
+    // check if publish article or draft article was pressed
+    let published;
+    if (event.submitter.classList.contains("post-submit")) {
+      published = true;
+    } else {
+      published = false;
+    }
+
+    // create data object to send
+    const postData = {
+      title: title,
+      content: content,
+      published: published,
+      // imageUrl: imageUrl,
+    };
+
+    // make fetch POST request
+    fetch(`${API_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((res) => {
+        // check if response is not ok (status 400, 500, etc.)
+        if (!res.ok) {
+          return res.json().then((errorData) => {
+            throw new Error(errorData.error || "Failed to post article");
+          });
+        }
+        return res.json();
+      })
+      .then((postData) => {
+        const postId = postData.post.id;
+        window.location.href = `?id=${postId}`;
+      })
+      .catch((err) => {
+        console.error("Error posting article:", err);
+
+        // display error message to user
+        let errorMsg = postForm.querySelector(".error-message");
+        if (!errorMsg) {
+          errorMsg = document.createElement("div");
+          errorMsg.classList.add("error-message");
+          postForm.insertBefore(errorMsg, postForm.firstChild);
+        }
+        errorMsg.textContent = err.message;
+      });
+  });
 }
