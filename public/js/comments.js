@@ -93,7 +93,7 @@ export function commentBox(postId) {
   commentSubmit.type = "submit";
   commentSubmit.textContent = "Submit Comment";
 
-  // append labels and input to form
+  // append labels and inputs to form
   commentForm.appendChild(hiddenPostId);
   commentForm.appendChild(commentAuthorLabel);
   commentForm.appendChild(commentAuthor);
