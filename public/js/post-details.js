@@ -106,6 +106,7 @@ export function showPostDetail(postId, isAdmin = false) {
               postEdit.className = "post-edit";
               postEdit.innerHTML =
                 '<i class="fa-regular fa-pen-to-square"></i>';
+              postEdit.title = "Edit post";
               postEdit.onclick = () => {
                 // click handler
               };
@@ -114,13 +115,40 @@ export function showPostDetail(postId, isAdmin = false) {
               const postDelete = document.createElement("button");
               postDelete.className = "post-delete";
               postDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+              postDelete.title = "Delete post";
               postDelete.onclick = () => {
+                // click handler
+              };
+
+              // create publish button
+              const postPublish = document.createElement("button");
+              postPublish.className = "post-publish";
+              postPublish.innerHTML = '<i class="fa-solid fa-upload"></i>';
+              postPublish.title = "Publish post";
+              postPublish.onclick = () => {
+                // click handler
+              };
+
+              // create unpublish button
+              const postUnpublish = document.createElement("button");
+              postUnpublish.className = "post-unpublish";
+              postUnpublish.innerHTML =
+                '<i class="fa-solid fa-compass-drafting"></i>';
+              postUnpublish.title = "Unpublish post";
+              postUnpublish.onclick = () => {
                 // click handler
               };
 
               // append edit and delete buttons to button container
               postButtonsContainer.appendChild(postEdit);
               postButtonsContainer.appendChild(postDelete);
+
+              // conditionally append publish or unpublish button
+              if (post.published) {
+                postButtonsContainer.appendChild(postUnpublish);
+              } else {
+                postButtonsContainer.appendChild(postPublish);
+              }
 
               // create wrapper for subtitle and buttons
               const subtitleButtonsWrapper = document.createElement("div");
