@@ -30,3 +30,18 @@
 .post-draft {
     flex: 1; /* each button takes up equal space */
 }
+
+/* edit and delete post buttons wrapper */
+.subtitle-buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* delete comment */
+.comment-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+}

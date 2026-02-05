@@ -6,7 +6,7 @@ import { formatDate } from "/shared/scripts/formatter.js";
 import {
   deletePost,
   updatePostPublishStatus,
-} from "/shared/scripts/post-actions.js";
+} from "/admin/js/admin-actions.js";
 
 // show post detail
 export function showPostDetail(postId, isAdmin = false) {
@@ -185,6 +185,7 @@ export function showPostDetail(postId, isAdmin = false) {
               const subtitleButtonsWrapper = document.createElement("div");
               subtitleButtonsWrapper.classList.add("subtitle-buttons-wrapper");
               subtitleButtonsWrapper.appendChild(postSubtitle);
+              // if admin: append edit and delete buttons
               if (isAdmin) {
                 subtitleButtonsWrapper.appendChild(postButtonsContainer);
               }
@@ -252,6 +253,7 @@ export function showPostDetail(postId, isAdmin = false) {
                       commentContainer,
                       postComments,
                       commentForm,
+                      isAdmin,
                     );
 
                     // reset form
@@ -285,7 +287,12 @@ export function showPostDetail(postId, isAdmin = false) {
               const commentContainer = document.createElement("div");
 
               // display existing comments
-              displayComments(commentContainer, postComments, commentForm);
+              displayComments(
+                commentContainer,
+                postComments,
+                commentForm,
+                isAdmin,
+              );
 
               // append post and comment containers to detail container
               detailContainer.appendChild(postContainer);

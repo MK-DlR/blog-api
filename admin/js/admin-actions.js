@@ -1,6 +1,6 @@
-// shared/scripts/post-actions.js
+// admin/js/post-actions.js
 
-import { API_URL } from "/config.js";
+import { API_URL } from "../config.js";
 
 // publish/unpublish post
 export function updatePostPublishStatus(postId, postData, shouldPublish) {
@@ -39,4 +39,8 @@ export function deletePost(postId) {
       });
     }
   });
+}
+
+export function deleteComment(commentId) {
+  // code
 }

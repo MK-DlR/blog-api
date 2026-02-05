@@ -16,6 +16,11 @@ a {
     color: black;
 }
 
+/* buttons */
+button {
+    cursor: pointer;
+}
+
 /* header */
 .header-img {
     width: 100%;
@@ -197,10 +202,4 @@ a {
 
 .post-buttons-container {
     margin-top: 10px;
-}
-/* edit and delete buttons wrapper */
-.subtitle-buttons-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }

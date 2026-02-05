@@ -1,8 +1,14 @@
 // public/js/comments.js
 
 import { formatDate } from "/shared/scripts/formatter.js";
+import { deleteComment } from "/admin/js/admin-actions.js";
 
-export function displayComments(commentContainer, postComments, commentForm) {
+export function displayComments(
+  commentContainer,
+  postComments,
+  commentForm,
+  isAdmin,
+) {
   // create comment title container and title
   const commentHeaderContainer = document.createElement("div");
   commentHeaderContainer.classList.add("comment-header-container");
@@ -23,10 +29,42 @@ export function displayComments(commentContainer, postComments, commentForm) {
     const commentItem = document.createElement("div");
     commentItem.classList.add("comment-item");
 
-    // comment content
+    // create comment content
     const commentContent = document.createElement("p");
     commentContent.classList.add("comment-content");
     commentContent.textContent = comment.content;
+
+    // create delete button
+    const commentDelete = document.createElement("button");
+    commentDelete.className = "comment-delete";
+    commentDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    commentDelete.title = "Delete comment";
+    commentDelete.onclick = () => {
+      // confirm before deletion
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this comment?",
+      );
+      if (confirmDelete) {
+        deleteComment(commentId)
+          .then(() => {
+            // refresh page-details to show with remaining comments, if any
+            // window.location.href = `/admin/?view=list`;
+          })
+          .catch((err) => {
+            console.error("Error deleting comment:", err);
+            alert(err.message);
+          });
+      }
+    };
+
+    // create wrapper for comment content and delete button
+    const commentButtonWrapper = document.createElement("div");
+    commentButtonWrapper.classList.add("comment-wrapper");
+    commentButtonWrapper.appendChild(commentContent);
+    // if admin: append delete button
+    if (isAdmin) {
+      commentButtonWrapper.appendChild(commentDelete);
+    }
 
     // create author and date container
     const authorDateWrapper = document.createElement("div");
@@ -44,10 +82,11 @@ export function displayComments(commentContainer, postComments, commentForm) {
       ? comment.guestName
       : "Anonymous";
 
-    // append content and author + date to <div>, then <div> to comment container
-    commentItem.appendChild(commentContent);
+    // append content and author + date to commentItem
+    // then commentItem to comment container
     authorDateWrapper.appendChild(commentAuthor);
     authorDateWrapper.appendChild(commentDate);
+    commentItem.appendChild(commentButtonWrapper);
     commentItem.appendChild(authorDateWrapper);
     commentContainer.appendChild(commentItem);
   }
