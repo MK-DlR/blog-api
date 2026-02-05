@@ -35,12 +35,23 @@ export function deletePost(postId) {
   }).then((res) => {
     if (!res.ok) {
       return res.json().then((errorData) => {
-        throw new Error(errorData.error || "Failed to update publish status");
+        throw new Error(errorData.error || "Failed to delete post");
       });
     }
   });
 }
 
 export function deleteComment(commentId) {
-  // code
+  return fetch(`${API_URL}/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (!res.ok) {
+      return res.json().then((errorData) => {
+        throw new Error(errorData.error || "Failed to delete comment");
+      });
+    }
+  });
 }

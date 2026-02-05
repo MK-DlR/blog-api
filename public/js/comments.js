@@ -45,10 +45,9 @@ export function displayComments(
         "Are you sure you want to delete this comment?",
       );
       if (confirmDelete) {
-        deleteComment(commentId)
+        deleteComment(comment.id)
           .then(() => {
-            // refresh page-details to show with remaining comments, if any
-            // window.location.href = `/admin/?view=list`;
+            window.location.reload();
           })
           .catch((err) => {
             console.error("Error deleting comment:", err);

@@ -19,7 +19,7 @@ router.post("/", commentController.createComment);
 // PUT /comments/:id - update comment
 router.put(
   "/:id",
-  authenticateJWT,
+  // authenticateJWT,  // TO DO: uncomment after implementing login
   findComment,
   commentController.updateComment,
 );
@@ -27,7 +27,7 @@ router.put(
 // DELETE /comments/:id - delete comment
 router.delete(
   "/:id",
-  authenticateJWT,
+  // authenticateJWT,  // TO DO: uncomment after implementing login
   findComment,
   commentController.deleteComment,
 );
