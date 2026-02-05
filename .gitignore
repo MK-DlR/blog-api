@@ -1,6 +1,9 @@
 # Environment variables
 .env
 
+# Admin creation script (contains credentials)
+backend/scripts/createAdmin.js
+
 # Dependencies
 backend/node_modules/
 backend/generated/prisma
