@@ -1,5 +1,10 @@
 // admin/js/script.js
 
+// check if user is logged in
+if (localStorage.getItem("isAdmin") !== "true") {
+  window.location.href = "/?view=login";
+}
+
 import { loadHeader } from "/shared/scripts/header.js";
 import { loadSidebar } from "/shared/scripts/sidebar.js";
 import { showPostDetail } from "/js/post-details.js";
