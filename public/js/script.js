@@ -46,6 +46,8 @@ if (postId) {
 } else if (view === "list") {
   // full article list was clicked
   showPostList();
+} else if (view === "login") {
+  // login form
 } else {
   // homepage, show most recent post
   showMostRecentPost();
