@@ -7,9 +7,8 @@ export function showPostList(isAdmin = false) {
   fetch(`${API_URL}/posts`)
     .then((res) => res.json())
     .then((data) => {
-      console.log("All posts:", data.posts); // debugging
       const publishedPosts = data.posts.filter((post) => post.published);
-      console.log("Published posts:", publishedPosts); // debugging
+      const postsToDisplay = isAdmin ? data.posts : publishedPosts;
       const app = document.getElementById("app");
       // clear app
       app.innerHTML = "";
@@ -29,7 +28,7 @@ export function showPostList(isAdmin = false) {
       articleContainer.appendChild(articleHeaderContainer);
 
       // loop through published posts
-      for (const post of publishedPosts) {
+      for (const post of postsToDisplay) {
         // create <li>
         const articleItem = document.createElement("li");
 
