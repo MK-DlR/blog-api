@@ -125,10 +125,13 @@ export function editPost(postId) {
         };
 
         // make fetch PUT request
+        const token = localStorage.getItem("token");
+
         fetch(`${API_URL}/posts/${postId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(postData),
         })

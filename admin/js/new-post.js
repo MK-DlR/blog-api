@@ -119,10 +119,13 @@ export function newPost() {
     };
 
     // make fetch POST request
+    const token = localStorage.getItem("token");
+
     fetch(`${API_URL}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postData),
     })
