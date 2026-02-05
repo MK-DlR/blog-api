@@ -93,7 +93,9 @@ exports.updatePost = async (req, res) => {
           updatePost.published !== undefined
             ? updatePost.published
             : post.published,
-        imageUrl: req.file ? `/uploads/${req.file.filename}` : post.imageUrl,
+        imageUrl: req.file
+          ? `/uploads/${req.file.filename}`
+          : updatePost.imageUrl || post.imageUrl,
       },
     });
 
