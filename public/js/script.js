@@ -4,6 +4,7 @@ import { loadHeader } from "/shared/scripts/header.js";
 import { loadSidebar } from "/shared/scripts/sidebar.js";
 import { showPostList } from "./article-list.js";
 import { showPostDetail } from "./post-details.js";
+import { loginForm } from "./login.js";
 import { API_URL } from "../config.js";
 
 loadHeader();
@@ -47,7 +48,8 @@ if (postId) {
   // full article list was clicked
   showPostList();
 } else if (view === "login") {
-  // login form
+  // login link was clicked
+  loginForm();
 } else {
   // homepage, show most recent post
   showMostRecentPost();

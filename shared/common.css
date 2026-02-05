@@ -16,15 +16,20 @@ a {
     color: black;
 }
 
-/* buttons */
 button {
     cursor: pointer;
 }
 
-/* header */
-.header-img {
+/* header + nav */
+.header-img,
+.sidebar-img {
     width: 100%;
     display: block;
+}
+
+.sidebar-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .nav {
@@ -32,7 +37,7 @@ button {
     padding: 10px 0;
     position: absolute;
     left: 240px;
-    width: calc(100% - 240px); /* use the remaining width */
+    width: calc(100% - 240px);
 }
 
 #prev-article {
@@ -54,35 +59,27 @@ button {
     min-height: 100vh;
 }
 
-/* sidebar */
 #sidebar {
     width: 240px;
     background-color: #FF7F01;
     padding: 20px;
-    flex-shrink: 0; /* don't shrink */
-}
-
-.sidebar-img {
-    width: 100%;
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    flex-shrink: 0;
 }
 
 .sidebar-content {
     line-height: 1.5;
 }
 
-/* main content */
 #app {
-    flex: 1; /* take remaining width */
+    flex: 1;
     padding: 10px;
 }
 
-/* article list and post detail headers */
+/* shared header styles */
 .article-header-container,
 .post-header-container,
-.comment-header-container {
+.comment-header-container,
+.login-header-container {
     background-color: #818081;
     margin-left: -10px;
     margin-right: -10px;
@@ -90,16 +87,26 @@ button {
     color: white;
 }
 
+.article-header-container,
+.login-header-container {
+    margin-top: 60px;
+    margin-bottom: 10px;
+}
+
+.post-header-container {
+    margin-top: 60px;
+}
+
+.comment-header-container {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
 /* article list */
 .article-container {
     text-align: center;
-    list-style-position: inside; /* ensure bulletpoints are centered */
+    list-style-position: inside;
     margin-top: 30px;
-}
-
-.article-header-container {
-    margin-top: 60px;
-    margin-bottom: 10px;
 }
 
 .back-link {
@@ -109,16 +116,12 @@ button {
 }
 
 /* post detail */
-.post-header-container {
-    margin-top: 60px;
-}
-
-.post-header {
+.post-header,
+.post-subtitle {
     text-align: left;
 }
 
 .post-subtitle {
-    text-align: left;
     font-size: 15px;
     padding-top: 10px;
 }
@@ -153,11 +156,6 @@ button {
 }
 
 /* comments */
-.comment-header-container {
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
 .comment-item {
     width: 50%;
     padding-top: 10px;
@@ -181,8 +179,9 @@ button {
     font-weight: 600;
 }
 
-/* new comment form */
-.comment-form {
+/* forms */
+.comment-form,
+.login-form {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -194,7 +193,8 @@ button {
     min-height: 100px; 
 }
 
-.comment-submit {
+.comment-submit,
+.login-submit {
     margin-top: 10px;
 }
 

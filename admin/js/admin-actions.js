@@ -8,6 +8,7 @@ export function updatePostPublishStatus(postId, postData, shouldPublish) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
       title: postData.title,
@@ -31,6 +32,7 @@ export function deletePost(postId) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then((res) => {
     if (!res.ok) {
@@ -46,6 +48,7 @@ export function deleteComment(commentId) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then((res) => {
     if (!res.ok) {
